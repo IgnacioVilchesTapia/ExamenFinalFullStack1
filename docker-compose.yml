@@ -72,7 +72,7 @@ volumes:
     locations: classpath:db/migration
 
 server:
-  port: 9003 # Puerto único para este servicio
+  port: 9003 
 
 eureka:
   client:
