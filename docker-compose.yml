@@ -55,26 +55,16 @@ volumes:
   mysql_login_data:
   mysql_destination_data:
   mysql_traveler_data:
-  spring:
-  application:
-    name: itinerary 
-  datasource:
-    url: jdbc:mysql://localhost:3313/itinerary 
-    username: examen
-    password: examen123
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: none
-    database-platform: org.hibernate.dialect.MySQLDialect
-  flyway:
-    enabled: true
-    locations: classpath:db/migration
-
-server:
-  port: 9003 
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  mysql_itinerary:
+    image: mysql:8.0
+    container_name: mysql_itinerary
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: itinerary
+      MYSQL_USER: examen
+      MYSQL_PASSWORD: examen123
+    ports:
+      - "3313:3306"
+    volumes:
+      - mysql_itinerary_data:/var/lib/mysql
