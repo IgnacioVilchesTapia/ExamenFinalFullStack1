@@ -20,9 +20,16 @@ public class ItineraryController {
         return service.findAll();
     }
 
-    @PostMapping
-    public Iterany create(@RequestBody Iterany itinerary) {
-        return service.save(itinerary);
+   @PostMapping
+public ResponseEntity<ApiResponse<Iterany>> create(@Valid @RequestBody ItineraryRequestDTO dto) {
+    Iterany entity = new Iterany();
+    entity.setName(dto.getName());
+    entity.setType(dto.getType());
+    entity.setTravelId(dto.getTravelId());
+    
+    Iterany saved = service.save(entity);
+    return ResponseEntity.ok(new ApiResponse<>("Creado exitosamente", saved));
+}
     }
 }
 
